@@ -1,6 +1,6 @@
 import sqlite3
 
-
+# function to execute sql scripts for database
 def create_db():
     import sqlite3
 
@@ -59,12 +59,15 @@ def create_db():
 
 
 if __name__ == '__main__':
+    # run script to create database
     create_db()
-    # creates connection to database
+    # create connection to database
     conn = sqlite3.connect('pets.db')
     c = conn.cursor()
 
     person_id = ''
+
+    # excute table join to pull relevant information
 
     while person_id != '-1':
 
@@ -77,6 +80,7 @@ if __name__ == '__main__':
         WHERE {} == person.id 
         '''.format(person_id)
         c.execute(query)
+        # fetch results to format response
         result = c.fetchall()
         for row in result:
             print('{} {}, {} years old'.format(row[1], row[2], row[3]))
